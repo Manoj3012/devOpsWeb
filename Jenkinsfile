@@ -3,12 +3,12 @@ pipeline {
     
     environment {
         DOCKER_PASSWORD = credentials('docker-cred')
-        DOCKER_USERNAME = "dinesh10275"
+        DOCKER_USERNAME = "manombamm"
         DOCKER_REGISTRY = "docker.io"
-        DOCKER_IMAGE_NAME = "dinesh10275/dev-backend"
-        GITHUB_REPO_URL = "https://github.com/TheTym-ProjectManagement/dev-backend.git"
+        DOCKER_IMAGE_NAME = "manombamm/task"
+        DOCKER_IMAGE_TAG = "${env.BUILD_NUMBER}" // Set Docker image tag to Jenkins build number
+        GITHUB_REPO_URL = "https://github.com/Manoj3012/devOpsWeb.git"
         GIT_CREDENTIALS_ID = "Git-cred"
-        STACK_NAME = "backend-dev-stack"
     }
 
     stages {
@@ -16,7 +16,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    dockerImage = docker.build("${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}:v0.${BUILD_NUMBER}", ".")
+                    dockerImage = docker.build("${DOCKER_REGISTRY}/${DOCKER_IMAGE_NAME}:v0.${DOCKER_IMAGE_TAG}", ".")
                 }
             }
         }
